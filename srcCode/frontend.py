@@ -102,38 +102,52 @@ class Frontend(Backend):
                 
 
     def NavSideBar(self):
-    
-        themeAsw = st_theme()
 
         with st.sidebar:
-            if themeAsw['base'] == 'light':
-                st.image('static/logoleed_cor.png')
+            st.image('static/logoleed_cor.png')
 
-                nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
-                                icons=["house", "cpu", "info-circle", "journal-bookmark-fill", "database-fill"],
-                                menu_icon="grid", default_index=0, orientation="vertical",
-                                styles={
-                            "container": {"background-color": "#fafafa"},
-                            "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
-                            "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px"},
-                            "nav-link-selected": {"background-color": "#007bff", "text-transform": "none"},
-                            })
-
-            else:   
-                st.image('static/logoleed.png')
-
-                nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
-                                icons=["house", "cpu", "info-circle", "journal-bookmark-fill"],
-                                menu_icon="grid", default_index=0, orientation="vertical",
-                                styles={
-                            "menu-title": {"color": "#ffffff"},
-                            "container": {"background-color": "#0f0f0f"},
-                            "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
-                            "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "color":"#ffffff", "margin-bottom":"10px"},
-                            "nav-link-selected": {"background-color": "#007bff", "text-transform": "none", "color":"#FFFFFF"},
-                            })
-
+            nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
+                            icons=["house", "cpu", "info-circle", "journal-bookmark-fill", "database-fill"],
+                            menu_icon="grid", default_index=0, orientation="vertical",
+                            styles={
+                        "container": {"background-color": "#fafafa"},
+                        "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
+                        "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px"},
+                        "nav-link-selected": {"background-color": "#007bff", "text-transform": "none"},
+                        })
         return nav
+
+        # themeAsw = st_theme()
+
+        # with st.sidebar:
+        #     if themeAsw['base'] == 'light':
+        #         st.image('static/logoleed_cor.png')
+
+        #         nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
+        #                         icons=["house", "cpu", "info-circle", "journal-bookmark-fill", "database-fill"],
+        #                         menu_icon="grid", default_index=0, orientation="vertical",
+        #                         styles={
+        #                     "container": {"background-color": "#fafafa"},
+        #                     "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
+        #                     "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px"},
+        #                     "nav-link-selected": {"background-color": "#007bff", "text-transform": "none"},
+        #                     })
+
+        #     else:   
+        #         st.image('static/logoleed.png')
+
+        #         nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
+        #                         icons=["house", "cpu", "info-circle", "journal-bookmark-fill"],
+        #                         menu_icon="grid", default_index=0, orientation="vertical",
+        #                         styles={
+        #                     "menu-title": {"color": "#ffffff"},
+        #                     "container": {"background-color": "#0f0f0f"},
+        #                     "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
+        #                     "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "color":"#ffffff", "margin-bottom":"10px"},
+        #                     "nav-link-selected": {"background-color": "#007bff", "text-transform": "none", "color":"#FFFFFF"},
+        #                     })
+
+        # return nav
 
 
     def PredictorsMenu(self):
