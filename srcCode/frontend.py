@@ -236,7 +236,8 @@ class Frontend(Backend):
         input = Backend._PrepareInput(self, fp, self.etn)
 
         self.max_percentage = 0
-        similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)
+        print('Linha 239: databasemol: {}, smiles = {}'.format(self.dataBaseMol, self.smiles))
+        similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.smiles)
 
         if self.mod == 'Random Forest':
             my_em = self.rf_maxem.predict(input)
