@@ -226,7 +226,7 @@ class Frontend(Backend):
 
     def predict(self):
 
-        if st.button('Predict'):
+        if st.button('Predict', key='predict_button'):
             st.markdown('### Predicting... 🧠⚙️')
 
             fp, bit = Backend._generateMF(self, self.smiles)
