@@ -95,27 +95,13 @@ class Frontend(Backend):
             st.markdown('---')
             st.write(self.text5)
 
-            st.write(self.data)
+            st.write(self.dataDL)
 
             with open('Data/no_missing_data.csv', 'r') as file:
                 st.download_button('Download Data', file, 'no_missing_data.csv', 'csv')
                 
 
     def NavSideBar(self):
-
-        # with st.sidebar:
-        #     st.image('static/logoleed_cor.png')
-
-        #     nav = option_menu("Menu", ["Home", "Predictors", "About", "Data"],
-        #                     icons=["house", "cpu", "info-circle", "journal-bookmark-fill", "database-fill"],
-        #                     menu_icon="grid", default_index=0, orientation="vertical",
-        #                     styles={
-        #                 "container": {"background-color": "#fafafa"},
-        #                 "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
-        #                 "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px", "color":"#000000"},
-        #                 "nav-link-selected": {"background-color": "#007bff", "text-transform": "none"},
-        #                 })
-        # return nav
 
         themeAsw = st_theme()
 
