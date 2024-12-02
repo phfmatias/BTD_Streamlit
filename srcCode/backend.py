@@ -34,7 +34,9 @@ class Backend:
 
     def _loadData(self):
         self.data = read_csv('Data/RafaelDB.csv')
-        self.dataDL = read_csv('Data/no_missing_data.csv').drop(columns=['stokes','yield','dc'])
+        dataDL = read_csv('Data/no_missing_data.csv').drop(columns=['stokes','yield','dc','loge'])
+        self.dataDL = dataDL[['molecule','smiles','max_abs','max_em', 'solvent', 'etn', 'doi']]
+
         self.morganBase = read_csv('Data/morgan.csv')
 
     def _generateMol(self, df):
