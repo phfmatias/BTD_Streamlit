@@ -225,40 +225,42 @@ class Frontend(Backend):
         
 
     def predict(self):
-        st.markdown('### Predicting... 🧠⚙️')
 
-        fp, bit = Backend._generateMF(self, self.smiles)
-        fp = fp.reshape(1, -1)
-        input = Backend._PrepareInput(self, fp, self.etn)
+        if st.button('Predict'):
+            st.markdown('### Predicting... 🧠⚙️')
 
-        if self.mod == 'Random Forest':
-            my_em = self.rf_maxem.predict(input)
-            my_abs = self.rf_maxabs.predict(input)
+            fp, bit = Backend._generateMF(self, self.smiles)
+            fp = fp.reshape(1, -1)
+            input = Backend._PrepareInput(self, fp, self.etn)
 
-        elif self.mod == 'XGBoost':
-            my_em = self.xgb_maxem.predict(input)
-            my_abs = self.xgb_maxabs.predict(input)
+            if self.mod == 'Random Forest':
+                my_em = self.rf_maxem.predict(input)
+                my_abs = self.rf_maxabs.predict(input)
 
-        elif self.mod == 'LightGBM':
-            my_em = self.lgbm_maxem.predict(input)
-            my_abs = self.lgbm_maxabs.predict(input)
+            elif self.mod == 'XGBoost':
+                my_em = self.xgb_maxem.predict(input)
+                my_abs = self.xgb_maxabs.predict(input)
 
-        col1,col2 = st.columns(2)
+            elif self.mod == 'LightGBM':
+                my_em = self.lgbm_maxem.predict(input)
+                my_abs = self.lgbm_maxabs.predict(input)
 
-        with col1:
-            st.markdown('#### Predicted max abs: {:.2f}nm'.format(my_abs[0]))
-        with col2:
-            st.markdown('#### Predicted max em: {:.2f}nm'.format(my_em[0]))
+            col1,col2 = st.columns(2)
 
-        st.markdown('<div style="text-align: center;"><h4>Predicted stokes shift: {:.2f} nm</div><h4>'.format(my_em[0] - my_abs[0]), unsafe_allow_html=True)
+            with col1:
+                st.markdown('#### Predicted max abs: {:.2f}nm'.format(my_abs[0]))
+            with col2:
+                st.markdown('#### Predicted max em: {:.2f}nm'.format(my_em[0]))
 
-        if self.max_percentage >= 70:        
-            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:green">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)  
+            st.markdown('<div style="text-align: center;"><h4>Predicted stokes shift: {:.2f} nm</div><h4>'.format(my_em[0] - my_abs[0]), unsafe_allow_html=True)
 
-        elif self.max_percentage < 70 and self.max_percentage > 50:
-            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:orange">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)              
-        
-        else:
-            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:red">{:.2f}%</span></h4></div>'.format(self.max_percentage), unsafe_allow_html=True)
+            if self.max_percentage >= 70:        
+                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:green">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)  
+
+            elif self.max_percentage < 70 and self.max_percentage > 50:
+                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:orange">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)              
+            
+            else:
+                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:red">{:.2f}%</span></h4></div>'.format(self.max_percentage), unsafe_allow_html=True)
 
                 
