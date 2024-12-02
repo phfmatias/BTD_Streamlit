@@ -172,8 +172,8 @@ class Frontend(Backend):
             if self.smiles:
                 st.info('Current SMILES: {}'.format(self.smiles))         
 
-                # similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
-                # self.max_percentage = max_percentage     
+                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.smiles)  
+                self.max_percentage = max_percentage     
 
                 st.markdown('#### Want to continue?')
 
@@ -199,8 +199,8 @@ class Frontend(Backend):
 
                 st.info('Current SMILES: {}'.format(self.smiles))
 
-                # similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
-                # self.max_percentage = max_percentage     
+                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.smiles)  
+                self.max_percentage = max_percentage     
 
                 st.markdown('#### This is the molecule that you inserted. Do you want to continue?') 
                             

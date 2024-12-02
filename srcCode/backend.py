@@ -32,7 +32,6 @@ class Backend:
         self._loadModels()
         self.dataBaseMol = self._generateMol(self.data)
 
-
     def _loadData(self):
         self.data = read_csv('Data/no_missing_data.csv')
         self.morganBase = read_csv('Data/morgan.csv')
