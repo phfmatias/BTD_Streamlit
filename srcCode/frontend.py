@@ -162,21 +162,19 @@ class Frontend(Backend):
     def click_button(self):
         st.session_state.clicked = True
 
-    #do not save the smiles in cache/session state
-    @st.cache_resource
-    def inputSmiles(_self):
+    def inputSmiles(self):
         
-        st.button("Draw molecule instead...", on_click=_self.click_button)
+        st.button("Draw molecule instead...", on_click=self.click_button)
 
         if st.session_state.clicked:
-            _self.smiles = st_ketcher('C1C=CC2C(=NSN=2)C=1')
+            self.smiles = st_ketcher('C1C=CC2C(=NSN=2)C=1')
 
-            if _self.smiles:
-                st.info('Current SMILES: {}'.format(_self.smiles))         
+            if self.smiles:
+                st.info('Current SMILES: {}'.format(self.smiles))         
 
-                similarities, max_percentage, is_trustable = Backend._tanimoto(_self, _self.dataBaseMol, _self.smiles)  
+                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
 
-                _self.max_percentage = max_percentage     
+                self.max_percentage = max_percentage     
 
                 st.markdown('#### Want to continue?')
 
@@ -189,22 +187,22 @@ class Frontend(Backend):
                     if st.button('No'):
                         st.error('Please, draw again or try to insert a SMILES instead.')
                         st.session_state.clicked = False 
-                        _self.smiles = ''
+                        self.smiles = ''
 
                         if st.button('Click here to insert a SMILES'):
                             st.session_state.clicked = False 
                             
         else:
-            _self.smiles = st.text_input('Smiles Input', placeholder='Insert SMILES here')
+            self.smiles = st.text_input('Smiles Input', placeholder='Insert SMILES here')
             
-            if _self.smiles:
-                _self.smiles = st_ketcher(_self.smiles)
+            if self.smiles:
+                self.smiles = st_ketcher(self.smiles)
 
-                st.info('Current SMILES: {}'.format(_self.smiles))
+                st.info('Current SMILES: {}'.format(self.smiles))
 
-                similarities, max_percentage, is_trustable = Backend._tanimoto(_self, _self.dataBaseMol, _self.smiles)  
+                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
 
-                _self.max_percentage = max_percentage     
+                self.max_percentage = max_percentage     
 
                 st.markdown('#### This is the molecule that you inserted. Do you want to continue?') 
                             
@@ -216,7 +214,7 @@ class Frontend(Backend):
                 with col2:
                     if st.button('No'):
                         st.error('Please insert another SMILES, or try to draw the molecule instead.')
-                        _self.smiles = ''
+                        self.smiles = ''
 
     def selectSolvent(self):
         solvents = ['Dimethylsulfoxide (0.444)', 'Water (1.0)', 'Dichloromethane (0.309)', 'Acetonitrile (0.46)', 'Tolune (0.099)', 'Ethanol (0.654)', 'Chloroform (0.259)', 'Methanol (0.762)', 'Dimethylformamide (0.386)', 'Cyclochexane (0.006)', 'Hexane (0.009)', 'Tetrahidrofurane (0.605)', 'Methyl Cianide (0.46)', 'Acetate (0.355)', 'Methyl Phenil (0.099)', 'Isopropanol (0.546)', 'Dioxane (0.164)', 'mXylene (0.074)', 'Chlorobenzene (0.333)', 'Ethyl Acetate (0.228)', 'DiethylEter (0.117)', 'Octanol (0.537)', 'Nitrobenzila (0.333)', 'Benzene (0.111)', 'Dichloroethane (0.194)']
