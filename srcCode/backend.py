@@ -49,7 +49,7 @@ class Backend:
         return input
 
     def _tanimoto(self, queryMol, threshold=0.6):
-        fps = [FingerprintMol(m) for m in self.databaseMol]
+        fps = [FingerprintMol(m) for m in self.dataBaseMol]
         query = FingerprintMol(Chem.MolFromSmiles(queryMol))
 
         similarities = [(idx, FingerprintSimilarity(query, f)) for idx, f in enumerate(fps)]
