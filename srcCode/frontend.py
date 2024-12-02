@@ -216,6 +216,9 @@ class Frontend(Backend):
                         st.error('Please insert another SMILES, or try to draw the molecule instead.')
                         self.smiles = ''
 
+        if st.button('Predict', key='predict_button'):
+            self.predict()
+
     def selectSolvent(self):
         solvents = ['Dimethylsulfoxide (0.444)', 'Water (1.0)', 'Dichloromethane (0.309)', 'Acetonitrile (0.46)', 'Tolune (0.099)', 'Ethanol (0.654)', 'Chloroform (0.259)', 'Methanol (0.762)', 'Dimethylformamide (0.386)', 'Cyclochexane (0.006)', 'Hexane (0.009)', 'Tetrahidrofurane (0.605)', 'Methyl Cianide (0.46)', 'Acetate (0.355)', 'Methyl Phenil (0.099)', 'Isopropanol (0.546)', 'Dioxane (0.164)', 'mXylene (0.074)', 'Chlorobenzene (0.333)', 'Ethyl Acetate (0.228)', 'DiethylEter (0.117)', 'Octanol (0.537)', 'Nitrobenzila (0.333)', 'Benzene (0.111)', 'Dichloroethane (0.194)']
 
@@ -226,44 +229,43 @@ class Frontend(Backend):
 
     def predict(self):
 
-        if st.button('Predict', key='predict_button'):
-            st.markdown('### Predicting... 🧠⚙️')
+        st.markdown('### Predicting... 🧠⚙️')
 
-            fp, bit = Backend._generateMF(self, self.smiles)
-            fp = fp.reshape(1, -1)
-            input = Backend._PrepareInput(self, fp, self.etn)
+        fp, bit = Backend._generateMF(self, self.smiles)
+        fp = fp.reshape(1, -1)
+        input = Backend._PrepareInput(self, fp, self.etn)
 
-            self.max_percentage = 0
-            similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)
+        self.max_percentage = 0
+        similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)
 
-            if self.mod == 'Random Forest':
-                my_em = self.rf_maxem.predict(input)
-                my_abs = self.rf_maxabs.predict(input)
+        if self.mod == 'Random Forest':
+            my_em = self.rf_maxem.predict(input)
+            my_abs = self.rf_maxabs.predict(input)
 
-            elif self.mod == 'XGBoost':
-                my_em = self.xgb_maxem.predict(input)
-                my_abs = self.xgb_maxabs.predict(input)
+        elif self.mod == 'XGBoost':
+            my_em = self.xgb_maxem.predict(input)
+            my_abs = self.xgb_maxabs.predict(input)
 
-            elif self.mod == 'LightGBM':
-                my_em = self.lgbm_maxem.predict(input)
-                my_abs = self.lgbm_maxabs.predict(input)
+        elif self.mod == 'LightGBM':
+            my_em = self.lgbm_maxem.predict(input)
+            my_abs = self.lgbm_maxabs.predict(input)
 
-            col1,col2 = st.columns(2)
+        col1,col2 = st.columns(2)
 
-            with col1:
-                st.markdown('#### Predicted max abs: {:.2f}nm'.format(my_abs[0]))
-            with col2:
-                st.markdown('#### Predicted max em: {:.2f}nm'.format(my_em[0]))
+        with col1:
+            st.markdown('#### Predicted max abs: {:.2f}nm'.format(my_abs[0]))
+        with col2:
+            st.markdown('#### Predicted max em: {:.2f}nm'.format(my_em[0]))
 
-            st.markdown('<div style="text-align: center;"><h4>Predicted stokes shift: {:.2f} nm</div><h4>'.format(my_em[0] - my_abs[0]), unsafe_allow_html=True)
+        st.markdown('<div style="text-align: center;"><h4>Predicted stokes shift: {:.2f} nm</div><h4>'.format(my_em[0] - my_abs[0]), unsafe_allow_html=True)
 
-            if self.max_percentage >= 70:        
-                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:green">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)  
+        if self.max_percentage >= 70:        
+            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:green">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)  
 
-            elif self.max_percentage < 70 and self.max_percentage > 50:
-                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:orange">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)              
-            
-            else:
-                st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:red">{:.2f}%</span></h4></div>'.format(self.max_percentage), unsafe_allow_html=True)
+        elif self.max_percentage < 70 and self.max_percentage > 50:
+            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:orange">{:.2f}%</span></h4>'.format(self.max_percentage), unsafe_allow_html=True)              
+        
+        else:
+            st.markdown('<div style="text-align: center;"><h4>Similarity: <span style="color:red">{:.2f}%</span></h4></div>'.format(self.max_percentage), unsafe_allow_html=True)
 
                 
