@@ -112,7 +112,7 @@ class Frontend(Backend):
                             styles={
                         "container": {"background-color": "#fafafa"},
                         "icon": {"color": "#ff6600", "font-size": "25px", "margin-left": "2px"}, 
-                        "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px"},
+                        "nav-link": {"font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#d7d7d7", "border-radius":"5px", "padding":"5px", "margin-bottom":"10px", "color":"#000000"},
                         "nav-link-selected": {"background-color": "#007bff", "text-transform": "none"},
                         })
         return nav
@@ -162,6 +162,8 @@ class Frontend(Backend):
     def click_button(self):
         st.session_state.clicked = True
 
+    #do not save the smiles in cache/session state
+    @st.cache(allow_output_mutation=True)
     def inputSmiles(self):
         
         st.button("Draw molecule instead...", on_click=self.click_button)
