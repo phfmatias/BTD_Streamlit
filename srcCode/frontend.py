@@ -163,7 +163,7 @@ class Frontend(Backend):
         st.session_state.clicked = True
 
     #do not save the smiles in cache/session state
-    @st.cache(allow_output_mutation=True)
+    @st.cache_resource
     def inputSmiles(self):
         
         st.button("Draw molecule instead...", on_click=self.click_button)
