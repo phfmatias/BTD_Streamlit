@@ -172,9 +172,9 @@ class Frontend(Backend):
             if self.smiles:
                 st.info('Current SMILES: {}'.format(self.smiles))         
 
-                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
+                #similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
 
-                self.max_percentage = max_percentage     
+                #self.max_percentage = max_percentage     
 
                 st.markdown('#### Want to continue?')
 
@@ -200,9 +200,9 @@ class Frontend(Backend):
 
                 st.info('Current SMILES: {}'.format(self.smiles))
 
-                similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
+                #similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)  
 
-                self.max_percentage = max_percentage     
+                #self.max_percentage = max_percentage     
 
                 st.markdown('#### This is the molecule that you inserted. Do you want to continue?') 
                             
@@ -232,6 +232,9 @@ class Frontend(Backend):
             fp, bit = Backend._generateMF(self, self.smiles)
             fp = fp.reshape(1, -1)
             input = Backend._PrepareInput(self, fp, self.etn)
+
+            self.max_percentage = 0
+            similarities, max_percentage, is_trustable = Backend._tanimoto(self, self.dataBaseMol, self.smiles)
 
             if self.mod == 'Random Forest':
                 my_em = self.rf_maxem.predict(input)
