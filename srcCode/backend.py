@@ -49,6 +49,11 @@ class Backend:
         return input
 
     def _tanimoto(self, queryMol, threshold=0.6):
+
+        print('*'*50)
+        print('Linha 53: {}'.format(type(self.dataBaseMol)))
+        print('*'*50)
+
         fps = [FingerprintMol(m) for m in self.dataBaseMol]
         query = FingerprintMol(Chem.MolFromSmiles(queryMol))
 
