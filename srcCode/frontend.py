@@ -55,7 +55,7 @@ class Frontend(Backend):
         navbar = Frontend.NavSideBar(self)
 
         if navbar == 'Home':
-            st.header('Machine Learning and SHAP Analysis Guide the Design of New Benzothiadiazoles Derivatives via Photophysical Property Prediction')
+            st.header('Integrating Machine Learning and SHAP Analysis to Advance the Rational Design of Benzothiadiazole Derivatives with Tailored Photophysical Properties')
             st.markdown('---')
             st.markdown(self.text1, unsafe_allow_html=True)
 
