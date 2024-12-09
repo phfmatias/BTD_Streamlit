@@ -27,7 +27,7 @@ class Texts():
         <div>
             <h3>Welcome</h3>
             <p>
-                Welcome to our web application for predicting the photophysical properties of benzothiazole-diazole (BTD) derivatives! 
+                Welcome to our web application for predicting the photophysical properties of benzothiadiazole (BTD) derivatives! 
                 This tool is designed to aid researchers and scientists in exploring the optical behavior of BTD compounds, widely recognized 
                 for their applications in bioimaging, optoelectronics, and material sciences.
             </p>
