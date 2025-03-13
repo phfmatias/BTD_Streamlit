@@ -24,7 +24,6 @@ from streamlit_theme import st_theme
 from streamlit_ketcher import st_ketcher
 from warnings import filterwarnings
 from .drawSmiles import *
-import cairosvg
 filterwarnings('ignore')
 
 ### SELF IMPORTS ###
